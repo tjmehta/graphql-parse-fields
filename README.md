@@ -26,7 +26,7 @@ var queryType = new GraphQLObjectType({
         var fields = parseFields(info)
         /*
         Fields parsed from query (at bottom of this example):
-
+          note: since keepRoot was not passed, parseFields ignores the root key "user" for convenience
         {
           id: true,
           name: true,
