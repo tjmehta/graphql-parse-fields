@@ -33,7 +33,7 @@ var queryType = new GraphQLObjectType({
             widgets: {
               edges {
                 node {
-                  id
+                  id: true
                 }
               }
             }
