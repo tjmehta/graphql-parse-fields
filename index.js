@@ -10,6 +10,7 @@ module.exports = parseFields
  * parse fields has two signatures:
  * 1)
  * @param {Object} info - graphql resolve info
+ * @param {Boolean} [keepRoot] default: true
  * @return {Object} fieldTree
  * 2)
  * @param {Array} asts - ast array
@@ -17,13 +18,22 @@ module.exports = parseFields
  * @param {Object} [fieldTree] - optional initial field tree
  * @return {Object} fieldTree
  */
-function parseFields (info) {
+function parseFields (/* dynamic */) {
+  var tree
+  var info = arguments[0]
+  var keepRoot = arguments[1]
   if (info.fieldASTs) {
-    var info = arguments[0]
-    return fieldTreeFromAST(info.fieldASTs, info.fragments)
+    // (info, keepRoot)
+    tree = fieldTreeFromAST(info.fieldASTs, info.fragments)
+    if (!keepRoot) {
+      var key = firstKey(tree)
+      tree = tree[key]
+    }
   } else {
-    return fieldTreeFromAST.apply(this, arguments)
+    // (asts, fragments, fieldTree)
+    tree = fieldTreeFromAST.apply(this, arguments)
   }
+  return tree
 }
 
 function fieldTreeFromAST (asts, fragments, init) {
@@ -51,4 +61,10 @@ function fieldTreeFromAST (asts, fragments, init) {
     } // else ignore
     return tree
   }, init)
+}
+
+function firstKey (obj) {
+  for (var key in obj) {
+    return key
+  }
 }

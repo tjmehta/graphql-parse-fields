@@ -64,18 +64,45 @@ describe('graphql-parse-fields', function () {
       }
       expect(self.info).to.exist
       expect(parseFields(self.info)).to.deep.equal({
-        user: {
-          id: true,
-          name: true,
-          widgets: {
-            edges: {
-              node: {
-                id: true,
-                name: true
-              }
+        id: true,
+        name: true,
+        widgets: {
+          edges: {
+            node: {
+              id: true,
+              name: true
             }
           }
         }
+      })
+    })
+  })
+
+  describe('keepRoot: true', function() {
+    it('should parse info fields ast w/ nested fragments', function () {
+      var self = this
+      return graphql.graphql(schema, nestedFragmentsQuery, null, {}).then(function (data) {
+        if (data.errors) {
+          data.errors.forEach(function (err) {
+            console.error('Error:', err.stack)
+          })
+          throw new Error('graphql error')
+        }
+        expect(self.info).to.exist
+        expect(parseFields(self.info, true)).to.deep.equal({
+          user: {
+            id: true,
+            name: true,
+            widgets: {
+              edges: {
+                node: {
+                  id: true,
+                  name: true
+                }
+              }
+            }
+          }
+        })
       })
     })
   })
