@@ -1,0 +1,45 @@
+{
+  "name": "graphql-parse-fields",
+  "version": "0.0.0",
+  "description": "Parse fields from AST (GraphQLResolveInfo) into a JSON tree",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha ./test && istanbul --text check-coverage --statements 100 --functions 100 --branches 100 --lines 100",
+    "test-watch": "nodemon -x mocha ./test",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjmehta/graphql-parse-fields.git"
+  },
+  "keywords": [
+    "graphql",
+    "ast",
+    "info",
+    "resolve",
+    "graphqlresolveinfo",
+    "fields",
+    "names",
+    "selection",
+    "fragments",
+    "selections",
+    "fragment"
+  ],
+  "author": "Tejesh Mehta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tjmehta/graphql-parse-fields/issues"
+  },
+  "homepage": "https://github.com/tjmehta/graphql-parse-fields#readme",
+  "dependencies": {
+    "cast-array": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "graphql": "^0.6.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.0.2",
+    "multiline": "^1.0.2",
+    "simple-relay-starter": "^1.3.11"
+  }
+}
