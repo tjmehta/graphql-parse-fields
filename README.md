@@ -9,6 +9,7 @@ npm i --save graphql-parse-fields
 ## Usage
 Example1: Parse GraphQL resolve `info`
  * @param {Object} info - graphql resolve info
+ * @param {Boolean} [ignoreRoot] - default: true
  * @return {Object} fieldTree
 ```js
 var parseFields = require('graphql-parse-fields')
@@ -24,7 +25,24 @@ var queryType = new GraphQLObjectType({
       resolve: function (root, args, ctx, info) {
         var fields = parseFields(info)
         /*
-        Fields parsed from query below:
+        Fields parsed from query (at bottom of this example):
+
+        {
+          id: true,
+          name: true,
+          widgets: {
+            edges {
+              node {
+                id: true
+              }
+            }
+          }
+        }
+        */
+
+       var fieldsWithRoot = parseFields(info, true) // keepRoot: true
+       /*
+        Fields parsed from query (at bottom of this example):
 
         {
           user {
