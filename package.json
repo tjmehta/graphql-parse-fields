@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "graphql": "^0.6.2",
+    "graphql": "^0.8.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.0.2",
     "multiline": "^1.0.2",

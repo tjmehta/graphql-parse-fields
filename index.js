@@ -1,10 +1,10 @@
-'use strict'
+'use strict';;
 
-var assert = require('assert')
+var assert = require('assert');;
 
-var castArr = require('cast-array')
+var castArr = require('cast-array');;
 
-module.exports = parseFields
+module.exports = parseFields;;
 
 /**
  * parse fields has two signatures:
@@ -19,14 +19,14 @@ module.exports = parseFields
  * @return {Object} fieldTree
  */
 function parseFields (/* dynamic */) {
-  var tree
-  var info = arguments[0]
-  var keepRoot = arguments[1]
-  if (info.fieldASTs) {
+  var tree;;
+  var info = arguments[0];;
+  var keepRoot = arguments[1];;
+  if (info.fieldNodes) {
     // (info, keepRoot)
-    tree = fieldTreeFromAST(info.fieldASTs, info.fragments)
+    tree = fieldTreeFromAST(info.fieldNodes, info.fragments);;
     if (!keepRoot) {
-      var key = firstKey(tree)
+      var key = firstKey(tree);;
       tree = tree[key]
     }
   } else {
@@ -37,26 +37,26 @@ function parseFields (/* dynamic */) {
 }
 
 function fieldTreeFromAST (asts, fragments, init) {
-  init = init || {}
-  fragments = fragments || {}
-  asts = castArr(asts)
+  init = init || {};;
+  fragments = fragments || {};;
+  asts = castArr(asts);;
   return asts.reduce(function (tree, val) {
-    var kind = val.kind
-    var name = val.name && val.name.value
-    var fragment
+    var kind = val.kind;;
+    var name = val.name && val.name.value;;
+    var fragment;;
     if (kind === 'Field') {
       if (val.selectionSet) {
-        tree[name] = tree[name] || {}
+        tree[name] = tree[name] || {};;
         fieldTreeFromAST(val.selectionSet.selections, fragments, tree[name])
       } else {
         tree[name] = true
       }
     } else if (kind === 'FragmentSpread') {
-      fragment = fragments[name]
-      assert(fragment, 'unknown fragment "' + name + '"')
+      fragment = fragments[name];;
+      assert(fragment, 'unknown fragment "' + name + '"');;
       fieldTreeFromAST(fragment.selectionSet.selections, fragments, tree)
     } else if (kind === 'InlineFragment') {
-      fragment = val
+      fragment = val;;
       fieldTreeFromAST(fragment.selectionSet.selections, fragments, tree)
     } // else ignore
     return tree
