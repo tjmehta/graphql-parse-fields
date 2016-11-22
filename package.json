@@ -39,7 +39,6 @@
     "graphql": "^0.8.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.0.2",
-    "multiline": "^1.0.2",
-    "simple-relay-starter": "^1.3.11"
+    "multiline": "^1.0.2"
   }
 }

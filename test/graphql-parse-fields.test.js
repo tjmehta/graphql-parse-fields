@@ -9,8 +9,7 @@ var describe = global.describe
 var beforeEach = global.beforeEach
 var it = global.it
 
-// https://github.com/mhart/simple-relay-starter/blob/master/schema/schema.js
-var schema = require('simple-relay-starter/schema/schema.js')
+var schema = require('./fixtures/schema.js')
 var nestedFragmentsQuery = multiline(function () { /*
 query userQuery {
   user {
@@ -118,7 +117,7 @@ describe('graphql-parse-fields', function () {
         throw new Error('graphql error')
       }
       expect(self.info).to.exist
-      expect(parseFields(self.info.fieldASTs, self.info.fragments, { yolo: true })).to.deep.equal({
+      expect(parseFields(self.info.fieldNodes, self.info.fragments, { yolo: true })).to.deep.equal({
         yolo: true,
         user: {
           id: true,
