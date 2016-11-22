@@ -6,11 +6,11 @@ var multiline = require('multiline')
 var parseFields = require('../')
 
 var describe = global.describe
+var beforeEach = global.beforeEach
 var it = global.it
 
-// https://github.com/mhart/simple-relay-starter/blob/master/schema/schema.js
-var schema = require('simple-relay-starter/schema/schema.js')
-var nestedFragmentsQuery = multiline(function(){/*
+var schema = require('./fixtures/schema.js')
+var nestedFragmentsQuery = multiline(function () { /*
 query userQuery {
   user {
     ...A
@@ -39,7 +39,7 @@ fragment B on User {
     }
   }
 }
-*/})
+*/ })
 
 describe('graphql-parse-fields', function () {
   beforeEach(function () {
@@ -78,7 +78,7 @@ describe('graphql-parse-fields', function () {
     })
   })
 
-  describe('keepRoot: true', function() {
+  describe('keepRoot: true', function () {
     it('should parse info fields ast w/ nested fragments', function () {
       var self = this
       return graphql.graphql(schema, nestedFragmentsQuery, null, {}).then(function (data) {
@@ -117,7 +117,7 @@ describe('graphql-parse-fields', function () {
         throw new Error('graphql error')
       }
       expect(self.info).to.exist
-      expect(parseFields(self.info.fieldASTs, self.info.fragments, { yolo: true })).to.deep.equal({
+      expect(parseFields(self.info.fieldNodes, self.info.fragments, { yolo: true })).to.deep.equal({
         yolo: true,
         user: {
           id: true,
@@ -137,17 +137,17 @@ describe('graphql-parse-fields', function () {
 
   it('should not error if it sees an invalid "kind"', function () {
     var asts = {
-      "kind": "Field",
-      "alias": null,
-      "name": {
-        "kind": "Name",
-        "value": "user"
+      'kind': 'Field',
+      'alias': null,
+      'name': {
+        'kind': 'Name',
+        'value': 'user'
       },
-      "selectionSet": {
-        "kind": "SelectionSet",
-        "selections": [
+      'selectionSet': {
+        'kind': 'SelectionSet',
+        'selections': [
           {
-            "kind": "BOGUS_KIND"
+            'kind': 'BOGUS_KIND'
           }
         ]
       }

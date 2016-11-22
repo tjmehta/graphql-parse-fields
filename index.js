@@ -22,9 +22,10 @@ function parseFields (/* dynamic */) {
   var tree
   var info = arguments[0]
   var keepRoot = arguments[1]
-  if (info.fieldASTs) {
+  var fieldNodes = info && (info.fieldASTs || info.fieldNodes)
+  if (fieldNodes) {
     // (info, keepRoot)
-    tree = fieldTreeFromAST(info.fieldASTs, info.fragments)
+    tree = fieldTreeFromAST(fieldNodes, info.fragments)
     if (!keepRoot) {
       var key = firstKey(tree)
       tree = tree[key]
