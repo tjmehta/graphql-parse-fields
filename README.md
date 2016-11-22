@@ -1,4 +1,4 @@
-# graphql-parse-fields [![Build Status](https://travis-ci.org/tjmehta/graphql-parse-fields.svg)](https://travis-ci.org/tjmehta/graphql-parse-fields) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
+# graphql-parse-fields [![Build Status](https://travis-ci.org/tjmehta/graphql-parse-fields.svg)](https://travis-ci.org/tjmehta/graphql-parse-fields?branch=master) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 Parse fields from AST (GraphQLResolveInfo) into a JSON tree
 
 ## Installation
