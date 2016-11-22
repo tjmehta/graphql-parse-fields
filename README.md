@@ -124,5 +124,8 @@ Both result in:
 */
 ```
 
+## Changelog
+[CHANGELOG.md](https://github.com/tjmehta/graphql-parse-fields/blob/master/CHANGELOG.md)
+
 ## License
 MIT
